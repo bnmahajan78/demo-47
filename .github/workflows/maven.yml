@@ -48,14 +48,13 @@ jobs:
         with:
           name: java-app
 
-  
-      - name: 'Az CLI login'
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Validate user  
+        #run: dir /s '${{ github.workspace }}/target/'
+        run: az login --tenant c25fc350-5f5e-400c-9a8a-089b28b79eae
 
       - name: 'Run az commands'
         run: |
+          az login --tenant c25fc350-5f5e-400c-9a8a-089b28b79eae
           az account show
           az group list
           pwd 
