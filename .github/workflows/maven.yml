@@ -47,18 +47,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: java-app
-
-      - name: Validate user  
-        #run: dir /s '${{ github.workspace }}/target/'
-        run: az login --tenant c25fc350-5f5e-400c-9a8a-089b28b79eae
-
-      - name: 'Run az commands'
-        run: |
-          az login --tenant c25fc350-5f5e-400c-9a8a-089b28b79eae
-          az account show
-          az group list
-          pwd 
-          
+ 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
