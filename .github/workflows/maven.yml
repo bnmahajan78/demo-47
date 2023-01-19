@@ -30,11 +30,10 @@ jobs:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
           
-      - name: validate tree structure
-        run: tree /f '${{ github.workspace }}/'
-        
-     
-        
+          
+      - name: Validate jar file
+        #run: dir /s '${{ github.workspace }}/target/'
+        run: tree /f '${{ github.workspace }}'
 
   deploy:
     runs-on: windows-latest
@@ -44,21 +43,6 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: display deploy tree structure
-        run: tree /f 'D:\'   
-        
-      - name: display content of  package.json
-        run: type  'D:\a\_actions\actions\download-artifact\v2\package.json'   
- 
-      - name: Azure Login
-        uses: Azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Display Azure account info
-        run: az account show -o yaml
-      
-        
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
@@ -70,5 +54,5 @@ jobs:
         with:
           app-name: 'JavaContainerForBIService2'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DE07A81BC961489F8FB5D530FCC405FA }}
-          package: '*.jar'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DDC0B7685BF34E27B13AAE71C8B9BA56 }}
+          package: '*.jar'	
